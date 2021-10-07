@@ -1,0 +1,38 @@
+body{
+    background-image: url("https://source.unsplash.com/_1UF_3TlKcQ");
+    background-repeat: no-repeat;
+    background-attachment: fixed; 
+    background-size: 100% 100%;
+}
+
+h5{
+    font-size: 450%;
+}
+
+table{
+    width: 100%;
+}
+
+#amount-table{
+    margin-left: 9%;
+}
+
+.amount-td{
+    padding-left: 4.5%;
+}
+
+th{
+    font-size: 1.6em;
+}
+
+td{
+    padding-left: 15%;
+    font-size: 1.5em;
+    font-weight: 700;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: #008B8B;
+    
+}
+
+
+/*  */
