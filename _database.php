@@ -12,7 +12,7 @@
      die("MySQL connection failed!!! due to " . mysqli_connect_errno());
  }
  else{
-     echo "<script> alert('Database connection successful'); </script>";
+    //  echo "<script> alert('Database connection successful'); </script>";
  }
 
  ?>

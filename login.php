@@ -1,3 +1,56 @@
+<?php
+
+function showAlert($type, $msg)
+{
+    echo '<div class="alert alert-' . $type . ' alert-dismissible fade show mb-0" role="alert">
+                     ' . $msg . '
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>';
+}
+
+if (isset($_POST['email']) && isset($_POST['password'])) {
+    require "_database.php";
+
+    $email = $_POST['email'];
+    $pass = $_POST['password'];
+   
+    $sql = "SELECT * FROM `carbon_user` WHERE email='$email';";
+    $result = $connection->query($sql);
+    $num_rows = mysqli_num_rows($result);
+
+
+    if ($num_rows != 0) {
+        while ($curr_row = $result->fetch_assoc()) {
+            $check_pass = $curr_row['password'];
+            if ($pass == $check_pass) 
+            {
+                showAlert("success", "Login Successful! Please wait while we redirect you to your account");
+                $login = true;
+                
+                session_start();
+                $_SESSION['name'] = $curr_row['name'];
+                $_SESSION['email'] = $email;
+                $_SESSION['loggedin'] = true;
+
+                sleep(1);
+                header('Location: dashboard.php');
+
+            } else {
+                showAlert("danger", "Login failed!");
+            }
+        }
+    } 
+    else {
+        echo '<div class="alert alert-danger alert-dismissible fade show mb-0" role="alert">
+                     Email or Password incorrect. Please recheck.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>';
+    }
+}
+
+?>
+
+
 <!doctype html>
 <html lang="en">
 
@@ -17,58 +70,31 @@
 
 <body>
 
-
     <?php
     include 'base.php';
     ?>
-
+    <br><br>
     <h1 style="text-align: center;" id="login-title">Login!</h1>
     <br>
     <br>
 
     <div class="col-6 mx-auto bg" id="login-box">
-        <form class="row g-3">
-            <div class="col-md-6">
-                <label for="inputEmail4" class="form-label">Email</label>
-                <input type="email" class="form-control " id="inputEmail4">
+        <form action="login.php" method="POST" class="col-xxl-12">
+            <div class="col-md-12">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" name="email" id="email">
+                <br>
             </div>
-            <div class="col-md-6">
-                <label for="inputPassword4" class="form-label">Password</label>
-                <input type="password" class="form-control" id="inputPassword4">
+
+            <div class="col-md-12">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" name="password" id="password">
+                <br>
             </div>
-            <div class="col-12">
-                <label for="inputAddress" class="form-label">Address</label>
-                <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
-            </div>
-            <div class="col-12">
-                <label for="inputAddress2" class="form-label">Address 2</label>
-                <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
-            </div>
-            <div class="col-md-6">
-                <label for="inputCity" class="form-label">City</label>
-                <input type="text" class="form-control" id="inputCity">
-            </div>
-            <div class="col-md-4">
-                <label for="inputState" class="form-label">State</label>
-                <select id="inputState" class="form-select">
-                    <option selected>Choose...</option>
-                    <option>...</option>
-                </select>
-            </div>
-            <div class="col-md-2">
-                <label for="inputZip" class="form-label">Zip</label>
-                <input type="text" class="form-control" id="inputZip">
-            </div>
-            <div class="col-12">
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="gridCheck">
-                    <label class="form-check-label" for="gridCheck">
-                        Check me out
-                    </label>
-                </div>
-            </div>
-            <div class="col-12">
-                <button type="submit" class="btn btn-primary">Sign in</button>
+
+
+            <div class="d-grid gap-2 row mx-auto px-5 gy-3">
+                <button class="btn btn-primary" type="submit" id="login-submit">login</button>
             </div>
         </form>
     </div>
