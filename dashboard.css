@@ -13,26 +13,30 @@ table{
     width: 100%;
 }
 
-#amount-table{
-    margin-left: 9%;
+/* #amount-table{
+    background-color: aqua;
+} */
+
+.font-green{
+    color: #0daaaa;
 }
 
 .amount-td{
-    padding-left: 4.5%;
+    padding-left: 2%;
 }
 
 th{
-    font-size: 1.6em;
+    font-size: 1.5em;
 }
 
-td{
+/* td{
     padding-left: 15%;
     font-size: 1.5em;
     font-weight: 700;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     color: #008B8B;
     
-}
+} */
 
 
 /*  */

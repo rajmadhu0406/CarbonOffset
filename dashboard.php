@@ -52,9 +52,9 @@ if ($result->num_rows == 0) {
     <div class="container-md">
 
         <div class="d-flex flex-row  mx-auto justify-content-around" style="width: 40%;">
-            <button type="button" class="btn btn-outline-light ms-5">Carbon footprint</button>
-            <button type="button" class="btn btn-outline-light ">Carbon Offset</button>
-            <button type="button" class="btn btn-outline-light ">Carbon History</button>
+            <a href="carbon_footprint.php" type="button"  class="btn btn-outline-light ms-5">Carbon footprint</a>
+            <a href="#" type="button"  class="btn btn-outline-light ">Carbon Offset</a>
+            <a href="#" type="button"  class="btn btn-outline-light ">Carbon History</a>
         </div>
         <br>
 
@@ -74,11 +74,8 @@ if ($result->num_rows == 0) {
 
                         <table id="carbon-table">
                             <tr>
-                                <th style="width: 18%;">CARBON FOOTPRINT</th>
-                                <th style="width: 16%;">CARBON OFFSET</th>
-                            </tr>
-                            <tr>
-                                <td>
+                                <th style="width: 28%;">CARBON FOOTPRINT</th>
+                                <th style="width: 15%;" class="font-green">
                                     <?php
                                         if ($row['CF'] == NULL) {
                                             echo '00';
@@ -87,8 +84,10 @@ if ($result->num_rows == 0) {
                                             echo $row['CF'];
                                         }
                                     ?>
-                                </td>
-                                <td style="padding-left: 14%;">
+                                </th>
+
+                                <th style="width: 22%;">CARBON OFFSET</th>
+                                <th style="width: 15%;" class="font-green">
                                     <?php
                                         if ($row['CO'] == NULL) {
                                             echo '0';
@@ -97,18 +96,16 @@ if ($result->num_rows == 0) {
                                             echo $row['CO'];
                                         }
                                     ?>
-                                </td>
+                                </th>
                             </tr>
+                        
                         </table>
 
-
+                        <br>
                         <table id="amount-table">
                             <tr>
-                                <th style="width: 15%;">AMOUNT</th>
-                                <th style="width: 14%;">AMOUNT</th>
-                            </tr>
-                            <tr>
-                                <td class="amount-td">
+                                <th style="width: 25%;" >FOOTPRINT AMOUNT</th>
+                                <th style="width: 15%;" class="amount-td font-green">
                                     <?php
                                         if ($row['CFM'] == NULL) {
                                             echo '0';
@@ -117,8 +114,10 @@ if ($result->num_rows == 0) {
                                             echo $row['CFM'];
                                         }
                                     ?>
-                                </td>
-                                <td class="amount-td">
+                                </th>
+
+                                <th style="width: 20%;" style="width: 50%;">OFFSET AMOUNT</th>
+                                <th style="width: 15%;" class="font-green amount-td">
                                     <?php
                                         if ($row['COM'] == NULL) {
                                             echo '0';
@@ -127,8 +126,9 @@ if ($result->num_rows == 0) {
                                             echo $row['COM'];
                                         }
                                     ?>
-                                </td>
+                                </th>
                             </tr>
+                            
                         </table>
 
                     </div>
