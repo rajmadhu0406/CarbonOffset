@@ -1,0 +1,12 @@
+body{
+    background-image: url("https://source.unsplash.com/_1UF_3TlKcQ");
+    background-repeat: no-repeat;
+    background-attachment: fixed; 
+    background-size: 100% 100%;
+}
+
+#heading{
+    font-size: 2.5em;
+    margin-left: 25%;
+    margin-top: 18%;
+}

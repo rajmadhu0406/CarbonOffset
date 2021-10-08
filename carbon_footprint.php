@@ -8,7 +8,72 @@ if ($_SESSION['loggedin'] != true) {
     header("location: index.php");
 }
 
+function showAlert($type, $msg)
+{
+    echo '<div class="alert alert-' . $type . ' alert-dismissible fade show mb-0" role="alert">
+                     ' . $msg . '
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>';
+}
 
+
+if (isset($_POST['letter'])) 
+{
+    $letter = $_POST['letter'];
+    $input = $letter . "-input";
+
+    if (isset($_POST[$input])) {
+
+        require "_database.php";
+
+        if ($letter == "e") {
+            $carbon = $_POST['e-co2-input'];
+            $amount = $_POST['e-amount-input'];
+        } elseif ($letter == "f") {
+            $carbon = $_POST['f-co2-input'];
+            $amount = $_POST['f-amount-input'];
+        } elseif ($letter == "h") {
+            $carbon = $_POST['h-co2-input'];
+            $amount = $_POST['h-amount-input'];
+        } elseif ($letter == "v") {
+            $carbon = $_POST['v-co2-input'];
+            $amount = $_POST['v-amount-input'];
+        }
+
+        // echo '<script> 
+        //     alert("fef");
+        // </script>';
+
+        $email = $_SESSION['email'];
+        $sqlc = "UPDATE `carbon_user` SET CF = CF+'$carbon' WHERE email = '$email';";
+        $sqla = "UPDATE `carbon_user` SET CFM = CFM+'$amount' WHERE email = '$email';";
+
+        if ($connection->query($sqlc) == true) {
+            echo '<script> 
+             alert("' . $letter . ' Added");
+        </script>';
+        } else {
+            $msg = $connection->error;
+            echo '<script> 
+             alert("' . $msg . ' ");
+        </script>';
+        }
+
+        if ($connection->query($sqla) == true) {
+            echo '<script> 
+             alert("' . $letter . ' money Added");
+        </script>';
+        } else {
+            $msg = $connection->error;
+            echo '<script> 
+             alert("' . $msg . '");
+        </script>';
+        }
+
+        
+    }
+        header("location: dashboard.php");
+}
 
 ?>
 
@@ -25,8 +90,8 @@ if ($_SESSION['loggedin'] != true) {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 
     <link rel="stylesheet" href="carbon_footprint.css">
-    <!-- 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="//code.jquery.com/jquery-1.12.0.min.js"></script> -->
 
     <title>Your Footprint</title>
@@ -63,83 +128,87 @@ if ($_SESSION['loggedin'] != true) {
                         </div>
 
                         <!-- X_IvVDuHvDQ  1200x1400-->
-                        <form action="add_cf.php" method="POST" class="hid" id="electricity">
+                        <form action="carbon_footprint.php" method="POST" class="hid" id="electricity">
                             <h1>ELECTRICITY</h1>
                             <div class="input-group input-group-lg mt-4 py-2">
                                 <span class="input-group-text" id="inputGroup-sizing-lg">kWh</span>
-                                <input placeholder="0" name="kwh-input" id="kwh-input" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+                                <input placeholder="0" name="e-input" id="kwh-input" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
                             </div>
                             <div class="input-group input-group-lg mt-4 py-3">
                                 <span class="input-group-text" id="inputGroup-sizing-lg">CO2e</span>
-                                <input class="form-control"  name="e-co2-input" id="e-co2-input" type="text" value="0" aria-label="Disabled input example" disabled readonly>
+                                <input class="form-control" name="e-co2-input" id="e-co2-input" type="text" value="0">
                             </div>
                             <div class="input-group input-group-lg mt-4 py-3">
                                 <span class="input-group-text" id="inputGroup-sizing-lg">&#8377&#8377&#8377&#8377</span>
-                                <input class="form-control" name="e-amount-input" id="e-amount-input" type="text" value="0" aria-label="Disabled input example" disabled readonly>
+                                <input class="form-control" name="e-amount-input" id="e-amount-input" type="text" value="0">
                             </div>
+                            <input type="text" value="e" name="letter" hidden>
                             <div class="my-5">
-                                <a id="add-btn-e" onclick="letter('e')" type="submit" class="btn btn-success btn-lg">Add</a>
+                                <button id="add-btn-e" type="submit" class="btn btn-success btn-lg">add</button>
                             </div>
                         </form>
 
                         <!-- X_IvVDuHvDQ  1200x1400-->
-                        <div class="hid" id="flight">
+                        <form action="carbon_footprint.php" method="POST" class="hid" id="flight">
                             <h1>FLIGHT</h1>
                             <div class="input-group input-group-lg mt-4 py-2">
                                 <span class="input-group-text" id="inputGroup-sizing-lg">KM</span>
-                                <input placeholder="0" id="f-km-input" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+                                <input placeholder="0" id="f-km-input" name="f-input" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
                             </div>
                             <div class="input-group input-group-lg mt-4 py-3">
                                 <span class="input-group-text" id="inputGroup-sizing-lg">CO2e</span>
-                                <input class="form-control" id="f-co2-input" type="text" value="0" aria-label="Disabled input example" disabled readonly>
+                                <input class="form-control" name="f-co2-input" id="f-co2-input" type="text" value="0">
                             </div>
                             <div class="input-group input-group-lg mt-4 py-3">
                                 <span class="input-group-text" id="inputGroup-sizing-lg">&#8377&#8377&#8377&#8377</span>
-                                <input class="form-control" id="f-amount-input" type="text" value="0" aria-label="Disabled input example" disabled readonly>
+                                <input class="form-control" name="f-amount-input" id="f-amount-input" type="text" value="0">
                             </div>
+                            <input type="text" value="f" name="letter" hidden>
                             <div class="my-5">
-                                <a href="#" id="add-btn-f" type="button" class="btn btn-success btn-lg">Add</a>
+                                <button href="#" id="add-btn-f" type="submit" class="btn btn-success btn-lg">Add</button>
                             </div>
-                        </div>
+                        </form>
                         <!-- X_IvVDuHvDQ  1200x1400-->
-                        <div class="hid" id="vehicle">
+                        <form action="carbon_footprint.php" method="POST" class="hid" id="vehicle">
                             <h1>VEHICLE</h1>
                             <div class="input-group input-group-lg mt-4 py-2">
                                 <span class="input-group-text" id="inputGroup-sizing-lg">KM.</span>
-                                <input placeholder="0" id="car-km-input" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+                                <input placeholder="0" id="car-km-input" name="v-input" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
                             </div>
                             <div class="input-group input-group-lg mt-4 py-3">
                                 <span class="input-group-text" id="inputGroup-sizing-lg">CO2e</span>
-                                <input class="form-control" id="v-co2-input" type="text" value="0" aria-label="Disabled input example" disabled readonly>
+                                <input class="form-control" name="v-co2-input" id="v-co2-input" type="text" value="0">
                             </div>
                             <div class="input-group input-group-lg mt-4 py-3">
                                 <span class="input-group-text" id="inputGroup-sizing-lg">&#8377&#8377&#8377&#8377</span>
-                                <input class="form-control" id="v-amount-input" type="text" value="0" aria-label="Disabled input example" disabled readonly>
+                                <input class="form-control" name="v-amount-input" id="v-amount-input" type="text" value="0">
                             </div>
+                            <input type="text" value="v" name="letter" hidden>
                             <div class="my-5">
-                                <a href="#" id="add-btn-v" type="button" class="btn btn-success btn-lg">Add</a>
+                                <button href="#" id="add-btn-v" type="submit" class="btn btn-success btn-lg">Add</button>
                             </div>
 
-                        </div>
+                        </form>
                         <!-- X_IvVDuHvDQ  1200x1400-->
-                        <div class="hid" id="hotel">
+                        <form action="carbon_footprint.php" method="POST" class="hid" id="hotel">
                             <h1>HOTEL</h1>
                             <div class="input-group input-group-lg mt-4 py-2">
                                 <span class="input-group-text" id="inputGroup-sizing-lg">Annual &#8377</span>
-                                <input placeholder="0" id="annual-input" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+                                <input placeholder="0" id="annual-input" name="h-input" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
                             </div>
                             <div class="input-group input-group-lg mt-4 py-3">
                                 <span class="input-group-text" id="inputGroup-sizing-lg">CO2e</span>
-                                <input class="form-control" id="h-co2-input" type="text" value="0" aria-label="Disabled input example" disabled readonly>
+                                <input class="form-control" name="h-co2-input" id="h-co2-input" type="text" value="0">
                             </div>
                             <div class="input-group input-group-lg mt-4 py-3">
                                 <span class="input-group-text" id="inputGroup-sizing-lg">&#8377&#8377&#8377&#8377</span>
-                                <input class="form-control" id="h-amount-input" type="text" value="0" aria-label="Disabled input example" disabled readonly>
+                                <input class="form-control" name="h-amount-input" id="h-amount-input" type="text" value="0">
                             </div>
+                            <input type="text" value="h-" name="letter" hidden>
                             <div class="my-5">
-                                <a href="#" id="add-btn-h" type="button" class="btn btn-success btn-lg">Add</a>
+                                <button href="#" id="add-btn-h" type="submit" class="btn btn-success btn-lg">Add</button>
                             </div>
-                        </div>
+                        </form>
 
 
 
@@ -262,17 +331,9 @@ if ($_SESSION['loggedin'] != true) {
                 //  console.log(co2_value);
             }, 200);
         }
-
-        function letter(l) {
-
-            <?php
-                $ll = "<script>document.write(l)</script>";
-                $_SESSION['letter'] = $ll;
-            ?>
-        
-        }
     </script>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3C5TFyBQBA13V1RKPf4uH+bwyzQxZ6CmMZHmNBEfJ" crossorigin="anonymous"></script>
 
 </body>
 
