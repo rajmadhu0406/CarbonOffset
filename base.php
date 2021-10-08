@@ -42,7 +42,7 @@ if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true)
             </div>
     </div>
 </nav>
-<br><br><br>
+<br><br>
 ';
 
 }
@@ -77,7 +77,7 @@ else
             </div>
     </div>
 </nav>
-<br><br><br>
+<br><br>
 ';
 }
 
