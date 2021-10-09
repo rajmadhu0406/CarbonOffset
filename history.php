@@ -50,7 +50,7 @@ require "_database.php";
 
         <?php
             $email = $_SESSION['email'];
-            $sql = "SELECT * FROM `carbon_history` WHERE email='$email'; ";
+            $sql = "SELECT * FROM `carbon_history` WHERE email='$email' ORDER BY `time` DESC;";
             $result = $connection->query($sql);
             $num_rows = mysqli_num_rows($result);
             if($num_rows == 0)
@@ -64,7 +64,8 @@ require "_database.php";
                     $carbon = (float)$curr_row['co2'];
                     $amount = $curr_row['amount'];
                     $time = $curr_row['time'];
-                    $tree = ($carbon * 6);
+                    $tree = round($carbon * 6);
+                    
                     
                     if($carbon < 1)
                     {
@@ -120,7 +121,7 @@ require "_database.php";
                         }
                         elseif($type == "Hotel")
                         {
-                            $imgsrc = "amQPH1ZOzBQ";
+                            $imgsrc = "eeqbbemH9-c";
                         }
                         elseif($type == "Vehicle")
                         {

@@ -467,7 +467,7 @@ if (isset($_POST['letter'])) { //always true
                 co2.value = Math.round(co2_value * 100) / 100;
 
                 var cost = (co2_value * 800);
-                amount.value = Math.round(cost * 100) / 100;;
+                amount.value = Math.round(cost * 100) / 100;
 
                 //  console.log(co2_value);
             }, 200);
