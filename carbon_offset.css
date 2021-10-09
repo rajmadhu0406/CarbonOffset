@@ -10,3 +10,21 @@ body{
     margin-left: 25%;
     margin-top: 18%;
 }
+
+#amount-heading{
+    font-size: 1.9em;
+    font-weight: 100;
+    margin-top: 5%;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+h1{
+    font-size: 3em;
+}
+
+#counter{
+    font-size: 1.2em;
+    font-weight: 700;
+    color: #108f7a;
+}
+

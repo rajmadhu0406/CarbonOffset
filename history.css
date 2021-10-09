@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@600&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Dosis:wght@600&family=Poppins:wght@700&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&display=swap');
+
+body{
+
+    background-image: url("https://source.unsplash.com/2GpLuy__erQ");
+    background-repeat: no-repeat;
+    background-attachment: fixed; 
+    background-size: 100% 100%;
+  
+    /* background: linear-gradient(to right, #67b26f, #4ca2cd); */
+    /* background: linear-gradient(to right, #348f50, #56b4d3); */
+    /* background: linear-gradient(to right, #d9a7c7, #fffcdc);  */
+    
+}
+
+.card{
+    border: solid 3px;
+    border-color: rgb(170, 184, 196);
+    box-shadow: 5px 5px 5px 3px rgba(56, 54, 58, 0.603);
+    border-radius: 10px;
+
+
+    /* font-family: 'Dosis', sans-serif; */
+    font-family: 'Open Sans', sans-serif;
+}
+
+img{
+    border-radius: 100px 100px;
+}
+
+#f-heading{
+    font-size: 1.5em;
+    /* background-color: #cc0909; */
+    background: linear-gradient(to right, #ff416c, #ff4b2b); 
+    color:  #cc0909;
+    height: 2em;
+    margin-top: -3.7%;
+    width: 107.3%;
+    margin-left: -3.5%;
+    border-radius: 10px;
+
+    
+    /* font-family: 'Dosis', sans-serif; */
+    font-family: 'Roboto Condensed', sans-serif;
+    
+}
+
+.f-card-div{
+    font-size: 1.1em;
+    padding-top: 2%;
+    font-weight: 600;
+    /* font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; */
+
+    /* font-family: 'Dosis', sans-serif; */
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+#o-heading{
+    font-size: 1.5em;
+    /* background-color: #09cc54; */
+
+    background: linear-gradient(to left, #11998e, #38ef7d); 
+
+    color:  #09cc5a;
+    height: 2em;
+    margin-top: -3.7%;
+    width: 107.3%;
+    margin-left: -3.5%;
+    border-radius: 10px;
+
+    /* font-family: 'Dosis', sans-serif; */
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+.o-card-div{
+    font-size: 1.1em;
+    padding-top: 2%;
+    font-weight: 600;
+    /* font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; */
+
+    /* font-family: 'Dosis', sans-serif; */
+    font-family: 'Roboto Condensed', sans-serif;
+}

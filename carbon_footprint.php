@@ -17,10 +17,12 @@ function showAlert($type, $msg)
 }
 
 
-if (isset($_POST['letter'])) 
-{
+if (isset($_POST['letter'])) { //always true
+
     $letter = $_POST['letter'];
     $input = $letter . "-input";
+
+    // ShowAlert("warning", isset($_POST[$input]));
 
     if (isset($_POST[$input])) {
 
@@ -29,51 +31,81 @@ if (isset($_POST['letter']))
         if ($letter == "e") {
             $carbon = $_POST['e-co2-input'];
             $amount = $_POST['e-amount-input'];
+            $type = "Electricity";
         } elseif ($letter == "f") {
             $carbon = $_POST['f-co2-input'];
             $amount = $_POST['f-amount-input'];
+            $type = "Flight";
         } elseif ($letter == "h") {
             $carbon = $_POST['h-co2-input'];
             $amount = $_POST['h-amount-input'];
+            $type = "Hotel";
         } elseif ($letter == "v") {
             $carbon = $_POST['v-co2-input'];
             $amount = $_POST['v-amount-input'];
+            $type = "Vehicle";
         }
 
         // echo '<script> 
         //     alert("fef");
         // </script>';
 
-        $email = $_SESSION['email'];
-        $sqlc = "UPDATE `carbon_user` SET CF = CF+'$carbon' WHERE email = '$email';";
-        $sqla = "UPDATE `carbon_user` SET CFM = CFM+'$amount' WHERE email = '$email';";
-
-        if ($connection->query($sqlc) == true) {
-            echo '<script> 
-             alert("' . $letter . ' Added");
-        </script>';
+        if ($carbon == "0" || $amount == "0") {
+            ShowAlert("danger", "value cant be  0");
         } else {
-            $msg = $connection->error;
-            echo '<script> 
-             alert("' . $msg . ' ");
-        </script>';
-        }
 
-        if ($connection->query($sqla) == true) {
-            echo '<script> 
-             alert("' . $letter . ' money Added");
-        </script>';
-        } else {
-            $msg = $connection->error;
-            echo '<script> 
-             alert("' . $msg . '");
-        </script>';
-        }
+            $email = $_SESSION['email'];
 
-        
-    }
-        header("location: dashboard.php");
-}
+            $sqlc = "UPDATE `carbon_user` SET CF = CF+'$carbon' WHERE email = '$email';";
+            $sqla = "UPDATE `carbon_user` SET CFM = CFM+'$amount' WHERE email = '$email';";
+
+            if ($connection->query($sqlc) == true) {
+                echo '<script> 
+                    alert("' . $letter . ' Added");
+                </script>';
+            } else {
+                $msg = $connection->error;
+                echo '<script> 
+                    alert("' . $msg . ' ");
+                </script>';
+            }
+
+            if ($connection->query($sqla) == true) {
+                echo '<script> 
+                    alert("' . $letter . ' money Added");
+                </script>';
+            } else {
+                $msg = $connection->error;
+                echo '<script> 
+                    alert("' . $msg . '");
+                </script>';
+            }
+
+
+            //adding to history table
+
+            $sqlh = "INSERT INTO `carbon_history` (`email`,`type`,`co2`,`amount`, `time`) VALUES ('$email','$type','$carbon','$amount', current_timestamp());";
+            if ($connection->query($sqlh) == true) {
+                echo '<script> 
+                    alert("' . $letter . '  Added in history");
+                </script>';
+            } else {
+                $msg = $connection->error;
+                echo '<script> 
+                    alert("' . $msg . '");
+                </script>';
+            }
+
+
+
+            header("location: dashboard.php");
+
+        } //null else
+
+
+
+    }//input set
+}//letter set
 
 ?>
 
@@ -124,7 +156,7 @@ if (isset($_POST['letter']))
                     <div class="card-body d-grid gap-3">
 
                         <div class="p-1 mb-5">
-                            <h5 class="card-titles" id="heading">Carbon Footprint</h5>
+                            <h5 class="card-titles" id="heading">CARBON FOOTPRINT</h5>
                         </div>
 
                         <!-- X_IvVDuHvDQ  1200x1400-->
@@ -132,7 +164,7 @@ if (isset($_POST['letter']))
                             <h1>ELECTRICITY</h1>
                             <div class="input-group input-group-lg mt-4 py-2">
                                 <span class="input-group-text" id="inputGroup-sizing-lg">kWh</span>
-                                <input placeholder="0" name="e-input" id="kwh-input" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+                                <input name="e-input" id="kwh-input" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
                             </div>
                             <div class="input-group input-group-lg mt-4 py-3">
                                 <span class="input-group-text" id="inputGroup-sizing-lg">CO2e</span>
@@ -144,7 +176,32 @@ if (isset($_POST['letter']))
                             </div>
                             <input type="text" value="e" name="letter" hidden>
                             <div class="my-5">
-                                <button id="add-btn-e" type="submit" class="btn btn-success btn-lg">add</button>
+                                <!--  -->
+                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">ADD</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Are you sure you want to add this?
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary btn-lg" data-bs-dismiss="modal">Close</button>
+                                                <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                                                <button id="add-btn-e" type="submit" class="btn btn-success btn-lg">Add</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--  -->
+                                <button type="button" class="btn btn-info px-3 py-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    Add Amount
+                                </button>
+
+
+                                <!-- <button id="add-btn-e" type="submit" class="btn btn-success btn-lg">add</button> -->
                             </div>
                         </form>
 
@@ -165,9 +222,40 @@ if (isset($_POST['letter']))
                             </div>
                             <input type="text" value="f" name="letter" hidden>
                             <div class="my-5">
-                                <button href="#" id="add-btn-f" type="submit" class="btn btn-success btn-lg">Add</button>
+
+                                <!--  -->
+                                <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel2">ADD</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Are you sure you want to add this?
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary btn-lg" data-bs-dismiss="modal">Close</button>
+                                                <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                                                <button href="#" id="add-btn-f" type="submit" class="btn btn-success btn-lg">Add</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--  -->
+                                <button type="button" class="btn btn-info px-3 py-2" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+                                    Add Amount
+                                </button>
+
+
+
+                                <!-- <button href="#" id="add-btn-f" type="submit" class="btn btn-success btn-lg">Add</button> -->
                             </div>
                         </form>
+
+
+
+
                         <!-- X_IvVDuHvDQ  1200x1400-->
                         <form action="carbon_footprint.php" method="POST" class="hid" id="vehicle">
                             <h1>VEHICLE</h1>
@@ -185,7 +273,34 @@ if (isset($_POST['letter']))
                             </div>
                             <input type="text" value="v" name="letter" hidden>
                             <div class="my-5">
-                                <button href="#" id="add-btn-v" type="submit" class="btn btn-success btn-lg">Add</button>
+
+                                <!--  -->
+                                <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel3" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel3">ADD</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Are you sure you want to add this?
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary btn-lg" data-bs-dismiss="modal">Close</button>
+                                                <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                                                <button href="#" id="add-btn-v" type="submit" class="btn btn-success btn-lg">Add</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--  -->
+                                <button type="button" class="btn btn-info px-3 py-2" data-bs-toggle="modal" data-bs-target="#exampleModal3">
+                                    Add Amount
+                                </button>
+
+
+
+                                <!-- <button href="#" id="add-btn-v" type="submit" class="btn btn-success btn-lg">Add</button> -->
                             </div>
 
                         </form>
@@ -204,9 +319,35 @@ if (isset($_POST['letter']))
                                 <span class="input-group-text" id="inputGroup-sizing-lg">&#8377&#8377&#8377&#8377</span>
                                 <input class="form-control" name="h-amount-input" id="h-amount-input" type="text" value="0">
                             </div>
-                            <input type="text" value="h-" name="letter" hidden>
+                            <input type="text" value="h" name="letter" hidden>
                             <div class="my-5">
-                                <button href="#" id="add-btn-h" type="submit" class="btn btn-success btn-lg">Add</button>
+
+                                <!--  -->
+                                <div class="modal fade" id="exampleModal4" tabindex="-1" aria-labelledby="exampleModalLabel4" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel4">ADD</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Are you sure you want to add this?
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary btn-lg" data-bs-dismiss="modal">Close</button>
+                                                <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                                                <button href="#" id="add-btn-v" type="submit" class="btn btn-success btn-lg">Add</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--  -->
+                                <button type="button" class="btn btn-info px-3 py-2" data-bs-toggle="modal" data-bs-target="#exampleModal4">
+                                    Add Amount
+                                </button>
+
+
+                                <!-- <button href="#" id="add-btn-h" type="submit" class="btn btn-success btn-lg">Add</button> -->
                             </div>
                         </form>
 
@@ -248,10 +389,10 @@ if (isset($_POST['letter']))
             setInterval(function() {
                 var kwh_value = kwh.value;
                 var co2_value = (kwh_value * 0.01) / 10;
-                co2.value = co2_value;
+                co2.value = Math.round(co2_value * 100) / 100;
 
                 var cost = (co2_value * 800);
-                amount.value = cost;
+                amount.value = Math.round(cost * 100) / 100;;
 
                 //  console.log(co2_value);
             }, 000);
@@ -272,10 +413,11 @@ if (isset($_POST['letter']))
             setInterval(function() {
                 var km_value = km.value;
                 var co2_value = (km_value * 0.13) / 500;
-                co2.value = co2_value;
-
+                co2.value = Math.round(co2_value * 100) / 100;
+ 
+                
                 var cost = (co2_value * 800);
-                amount.value = cost;
+                amount.value = Math.round(cost * 100) / 100;;
 
                 //  console.log(co2_value);
             }, 200);
@@ -298,11 +440,10 @@ if (isset($_POST['letter']))
             setInterval(function() {
                 var km_value = km.value;
                 var co2_value = (km_value * 0.03) / 200;
-                co2.value = co2_value;
+                co2.value = Math.round(co2_value * 100) / 100;
 
                 var cost = (co2_value * 800);
-                amount.value = cost;
-
+                amount.value = Math.round(cost * 100) / 100;;
                 //  console.log(co2_value);
             }, 200);
 
@@ -323,13 +464,17 @@ if (isset($_POST['letter']))
             setInterval(function() {
                 var annual_value = annual.value;
                 var co2_value = (annual_value * 0.08) / 20000;
-                co2.value = co2_value;
+                co2.value = Math.round(co2_value * 100) / 100;
 
                 var cost = (co2_value * 800);
-                amount.value = cost;
+                amount.value = Math.round(cost * 100) / 100;;
 
                 //  console.log(co2_value);
             }, 200);
+        }
+
+        function reset() {
+            document.getElementById("electricity").reset();
         }
     </script>
 

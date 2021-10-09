@@ -1,3 +1,7 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,200&display=swap');
+
+
 body{
     background-image: url("https://source.unsplash.com/_1UF_3TlKcQ");
     background-repeat: no-repeat;
@@ -6,11 +10,26 @@ body{
 }
 
 #heading{
-    font-size: 2.5em;
-    margin-left: 25%;
-    margin-top: 18%;
+    font-size: 3.2em;
+    margin-left: 18%;
+    margin-top: 19%;
+    color: rgb(89, 177, 89);
+}
+
+h1{
+    color: rgb(89, 177, 89);
+}
+
+h5{
+    font-size: 1.7em;
+    color: rgb(56, 119, 119);
 }
 
 .hid{
     display: none;
+}
+
+.modal-body{
+    font-size: 1.2em;
+    font-family: 'Yanone Kaffeesatz', sans-serif;
 }

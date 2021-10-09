@@ -52,9 +52,9 @@ if ($result->num_rows == 0) {
     <div class="container-md">
 
         <div class="d-flex flex-row  mx-auto justify-content-around" style="width: 40%;">
-            <a href="carbon_footprint.php" type="button"  class="btn btn-outline-light ms-5">Carbon footprint</a>
-            <a href="carbon_offset.php" type="button"  class="btn btn-outline-light ">Carbon Offset</a>
-            <a href="#" type="button"  class="btn btn-outline-light ">Carbon History</a>
+            <a href="carbon_footprint.php" type="button"  class="btn btn-outline-light ms-5 px-5 mx-4">Carbon footprint</a>
+            <a href="carbon_offset.php" type="button"  class="btn btn-outline-light px-5 mx-4">Carbon Offset</a>
+            <a href="history.php" type="button"  class="btn btn-outline-light  mx-4 px-5">Carbon History</a>
         </div>
         <br>
 
