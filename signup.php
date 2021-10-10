@@ -3,6 +3,7 @@
 $validation = false;
 
 
+
 if (isset($_POST['s-name']) && isset($_POST['s-pass1']) && isset($_POST['s-pass2'])) {
 
     require "_database.php";
@@ -56,7 +57,7 @@ if (isset($_POST['s-name']) && isset($_POST['s-pass1']) && isset($_POST['s-pass2
             $user_result =  mysqli_query($connection, $user_query);
             if (mysqli_num_rows($user_result) != 0) {
                 echo '<div class="alert alert-danger alert-dismissible fade show mb-0" role="alert">
-                        Email Id already exist, Please choose a different email address!
+                        Email Id already exist, Please choose a different email address! 
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>';
             }
@@ -107,7 +108,7 @@ if (isset($_POST['s-name']) && isset($_POST['s-pass1']) && isset($_POST['s-pass2
         alert("' . $msg . '");
         </script>';
         }
-
+       
         $connection->close();
     }
 }
