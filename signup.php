@@ -51,7 +51,7 @@ if (isset($_POST['s-name']) && isset($_POST['s-pass1']) && isset($_POST['s-pass2
 
         if ($passwordErr == "none") {
 
-            //checking if email already exists or not
+            //checking if email already exists  not
             $mail = $_POST['s-email'];
             $user_query = 'SELECT * FROM `carbon_user` WHERE email="' . $mail . '"';
             $user_result =  mysqli_query($connection, $user_query);
