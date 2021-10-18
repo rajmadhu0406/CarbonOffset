@@ -19,10 +19,17 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
     $num_rows = mysqli_num_rows($result);
 
 
+    // if (password_verify('rasmuslerdorf', $hash)) {
+    //     echo 'Password is valid!';
+    // } else {
+    //     echo 'Invalid password.';
+    // }
+
+
     if ($num_rows != 0) {
         while ($curr_row = $result->fetch_assoc()) {
-            $check_pass = $curr_row['password'];
-            if ($pass == $check_pass) 
+            $hash_pass = $curr_row['password'];
+            if (password_verify($pass, $hash_pass))
             {
                 showAlert("success", "Login Successful! Please wait while we redirect you to your account");
                 $login = true;

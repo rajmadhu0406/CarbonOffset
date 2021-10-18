@@ -66,10 +66,17 @@ if (isset($_POST['s-name']) && isset($_POST['s-pass1']) && isset($_POST['s-pass2
             }
         }
     }
+    else{
+        echo '<div class="alert alert-danger alert-dismissible fade show mb-0" role="alert">
+                        Password not match.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>';
+    }
 
 
 
     if ($validation == true) {
+
 
         $name = $_POST['s-name'];
         $email = $_POST['s-email'];
@@ -95,7 +102,9 @@ if (isset($_POST['s-name']) && isset($_POST['s-pass1']) && isset($_POST['s-pass2
         //     echo 'Invalid password.';
         // }
 
-        $sql = "INSERT INTO `carbon_user` (`name`,`email`,`password`,`phone`,`time`) VALUES ('$name','$email','$password1','$phone', current_timestamp());";
+        $hash_pass = password_hash($password1, PASSWORD_DEFAULT);
+
+        $sql = "INSERT INTO `carbon_user` (`name`,`email`,`password`,`phone`,`time`) VALUES ('$name','$email','$hash_pass','$phone', current_timestamp());";
 
         if ($connection->query($sql) == true) {
             echo '<div class="alert alert-success alert-dismissible fade show mb-0" role="alert">
@@ -108,7 +117,8 @@ if (isset($_POST['s-name']) && isset($_POST['s-pass1']) && isset($_POST['s-pass2
         alert("' . $msg . '");
         </script>';
         }
-       
+        sleep(5);
+        header("location: signup.php");
         $connection->close();
     }
 }
@@ -193,15 +203,20 @@ if (isset($_POST['s-name']) && isset($_POST['s-pass1']) && isset($_POST['s-pass2
             </div>
 
             <div class="d-grid gap-2 row mx-auto px-5 gy-3">
-                <button class="btn btn-primary" type="submit" id="submit">SignUp</button>
+                <button class="btn btn-primary" type="submit" value="submit" id="submit">SignUp</button>
+                <button class="btn btn-primary" type="reset" value="reset" id="reset" hidden>Reset</button>
             </div>
         </form>
     </div>
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3C5TFyBQBA13V1RKPf4uH+bwyzQxZ6CmMZHmNBEfJ" crossorigin="anonymous"></script>
-
-
+    <script>
+        function reset(){
+            const reset_btn = document.getElementById('reset');
+            reset_btn.click(); 
+        }
+    </script>
 </body>
 
 </html>
