@@ -25,10 +25,10 @@ if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true)
                     <a class="nav-link" aria-current="page" href="index.php">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">About</a>
+                    <a class="nav-link" href="about.php">FAQs</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Contact</a>
+                    <a class="nav-link" href="contact.php">Contact</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="dashboard.php">Dashboard</a>
@@ -63,10 +63,10 @@ else
                     <a class="nav-link" aria-current="page" href="index.php">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">About</a>
+                    <a class="nav-link" href="about.php">FAQs</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Contact</a>
+                    <a class="nav-link" href="contact.php">Contact</a>
                 </li>
             </ul>
            
