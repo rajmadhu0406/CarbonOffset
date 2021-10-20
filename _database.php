@@ -1,7 +1,7 @@
 <?php
 
  //setting up connection variables
- $server = "127.0.0.1";
+ $server = "127.0.0.1:3307";
  $username = "root"; 
  $password = "";
  $database = "wt_project";

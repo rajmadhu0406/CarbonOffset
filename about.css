@@ -7,6 +7,12 @@
   right : 5%;
 }
 
+h2{
+  background: linear-gradient(to right, #8360c3, #2ebf91);
+  color: white;
+  padding: 10px;
+}
+
 h1{
   position:absolute;
   top:10%;

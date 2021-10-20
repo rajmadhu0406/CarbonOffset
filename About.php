@@ -50,7 +50,7 @@ This is called the Kyoto protocol: a party can sell an unused emissions allowanc
    <label for="q2" class="panel-title">How Carbon Offsets Can Address Your Carbon Footprint?</label>
    <div class="panel-content">
      <p>
-     Native’s Help Build™ carbon offsets accomplish more than most offsets: they help fund new projects that reduce greenhouse gas pollution.
+     Native’s Help Build carbon offsets accomplish more than most offsets: they help fund new projects that reduce greenhouse gas pollution.
 But even if you take every energy-saving step, if you are a 21st-century human, you will leave a carbon footprint. Using carbon offsets, you can counteract the greenhouse gas emissions that you cannot avoid causing.
 <img src="https://native.eco/wp-content/uploads/2018/03/HB_wind_web_2-28-14-1.png" class="img-fluid" alt="Responsive image">
      </p>
@@ -60,7 +60,7 @@ But even if you take every energy-saving step, if you are a 21st-century human, 
  <div class="faq-question">
    <input id="q3" type="checkbox" class="panel">
    <div class="plus">+</div>
-   <label for="q3" class="panel-title">How Help Build™ Carbon Offsets Work?</label>
+   <label for="q3" class="panel-title">How Help Build Carbon Offsets Work?</label>
    <div class="panel-content">
      <p>
      Help Build carbon offsets are a new, progressive type of carbon offset with a bigger impact than conventional offsets.
