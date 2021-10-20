@@ -37,7 +37,7 @@ if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true)
            
         </div>
         <div id="navbarLogin" class="mx-4">
-                <a href="dashboard.php" type="button" class="btn btn-outline-light">Welcom '.$_SESSION['name'].'</a>
+                <a href="dashboard.php" type="button" class="btn btn-outline-light">Welcome '.$_SESSION['name'].'</a>
                 <a role="button" class="btn btn-outline-danger" href="logout.php">Logout</a>
             </div>
     </div>
