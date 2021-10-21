@@ -159,7 +159,7 @@
       <div class="container">
         <div class="row">
           <div class="col-sm-12 col-md-6">
-            <h6>About</h6>
+            <h6 id="about">About</h6>
             <p class="text-justify">The carbon Footprint is currently 60 percent of humanity’s overall Ecological Footprint and its most rapidly growing component. Humanity’s carbon Footprint has increased 11-fold since 1961. Reducing humanity’s carbon Footprint is the most essential step we can take to end overshoot and live within the means of our planet.</p>
           </div>
 
@@ -168,8 +168,10 @@
           <div class="col-xs-6 col-md-3">
             <h6>Quick Links</h6>
             <ul class="footer-links">
-              <li><a href="about.php">About Us</a></li>
+              <li><a href="about.php">FAQs</a></li>
               <li><a href="contact.php">Contact Us</a></li>
+              <li><a href="index  .php">Home</a></li>
+              <li><a href="signup.php">Register</a></li>
 
             </ul>
           </div>
@@ -186,10 +188,15 @@
 
           <div class="col-md-4 col-sm-6 col-xs-12">
             <ul class="social-icons">
-              <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
-              <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
-              <li><a class="dribbble" href="#"><i class="fa fa-dribbble"></i></a></li>
-              <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>
+                <!-- <li><a class="facebook white" href="#"><i class="fa fa-facebook"></i></a></li>
+                <li><a class="twitter white" href="#"><i class="fa fa-twitter"></i></a></li>
+                <li><a class="dribbble white" href="#"><i class="fa fa-dribbble"></i></a></li>
+                <li><a class="linkedin white" href="#"><i class="fa fa-linkedin"></i></a></li> -->
+              <li><a class="bi bi-facebook fa fa-facebook facebook white" href="https://www.facebook.com" target="_blank" ></a> </li>
+              <li><a class="bi bi-twitter fa fa-twitter twitter white" href="https://www.twitter.com" target="_blank"></a> </li>
+              <li><a class="bi bi-instagram fa fa-dribbble dribbble white" href="https://www.instagram.com" target="_blank"></a> </li>
+              <li><a class="bi bi-linkedin fa fa-linkedin linkedin white" href="https://www.linkedin.com" target="_blank"></a> </li>
+
             </ul>
           </div>
         </div>

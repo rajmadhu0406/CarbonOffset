@@ -31,6 +31,9 @@ if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true)
                     <a class="nav-link" href="contact.php">Contact</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="http://127.0.0.1/WT/project/index.php#about">About</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="dashboard.php">Dashboard</a>
                 </li>
             </ul>
@@ -67,6 +70,9 @@ else
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="contact.php">Contact</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="http://127.0.0.1/WT/project/index.php#about">About</a>
                 </li>
             </ul>
            
