@@ -20,7 +20,7 @@ if ($result->num_rows == 0) {
            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
          </div>';
 } else {
-    $row = $result->fetch_assoc();
+    $row = $result->fetch_assoc(); //returns the first row
 }
 
 ?>
@@ -78,7 +78,7 @@ if ($result->num_rows == 0) {
                                 <th style="width: 15%;" class="font-green">
                                     <?php
                                         if ($row['CF'] == NULL) {
-                                            echo '00';
+                                            echo '0';
                                         } 
                                         else {
                                             echo $row['CF'];

@@ -170,7 +170,7 @@
             <ul class="footer-links">
               <li><a href="about.php">FAQs</a></li>
               <li><a href="contact.php">Contact Us</a></li>
-              <li><a href="index  .php">Home</a></li>
+              <li><a href="index.php">Home</a></li>
               <li><a href="signup.php">Register</a></li>
 
             </ul>

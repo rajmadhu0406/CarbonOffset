@@ -1,5 +1,13 @@
 <?php
 
+if (!isset($_SESSION)) {
+    session_start();
+}
+
+if (isset($_SESSION['loggedin'] ) && $_SESSION['loggedin'] == true) {
+    header("location: dashboard.php");
+}
+
 $validation = false;
 
 
@@ -60,13 +68,11 @@ if (isset($_POST['s-name']) && isset($_POST['s-pass1']) && isset($_POST['s-pass2
                         Email Id already exist, Please choose a different email address! 
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>';
-            }
-            else{
+            } else {
                 $validation = true;
             }
         }
-    }
-    else{
+    } else {
         echo '<div class="alert alert-danger alert-dismissible fade show mb-0" role="alert">
                         Password not match.
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -117,7 +123,6 @@ if (isset($_POST['s-name']) && isset($_POST['s-pass1']) && isset($_POST['s-pass2
         alert("' . $msg . '");
         </script>';
         }
-        sleep(5);
         header("location: signup.php");
         $connection->close();
     }
@@ -212,9 +217,9 @@ if (isset($_POST['s-name']) && isset($_POST['s-pass1']) && isset($_POST['s-pass2
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3C5TFyBQBA13V1RKPf4uH+bwyzQxZ6CmMZHmNBEfJ" crossorigin="anonymous"></script>
     <script>
-        function reset(){
+        function reset() {
             const reset_btn = document.getElementById('reset');
-            reset_btn.click(); 
+            reset_btn.click();
         }
     </script>
 </body>

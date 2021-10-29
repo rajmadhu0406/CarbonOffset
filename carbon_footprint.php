@@ -377,11 +377,11 @@ if (isset($_POST['letter'])) { //always true
 
         function Electricity() {
 
-            _electricity.style.display = "block ";
+            _electricity.style.display = "block";
             _vehicle.style.display = "none ";
             _hotel.style.display = "none";
             _flight.style.display = "none";
-            heading.style.display = "none ";
+            heading.style.display = "none";
 
             var kwh = document.getElementById('kwh-input');
             var co2 = document.getElementById('e-co2-input');
@@ -394,8 +394,8 @@ if (isset($_POST['letter'])) { //always true
                 var cost = (co2_value * 800);
                 amount.value = Math.round(cost * 100) / 100;;
 
-                //  console.log(co2_value);
-            }, 000);
+                // console.log(co2_value);
+            }, 0);
         }
 
         function Flight() {
@@ -473,9 +473,9 @@ if (isset($_POST['letter'])) { //always true
             }, 200);
         }
 
-        function reset() {
-            document.getElementById("electricity").reset();
-        }
+        // function reset() {
+        //     document.getElementById("electricity").reset();
+        // }
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3C5TFyBQBA13V1RKPf4uH+bwyzQxZ6CmMZHmNBEfJ" crossorigin="anonymous"></script>

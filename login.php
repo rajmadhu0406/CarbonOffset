@@ -31,8 +31,8 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
             $hash_pass = $curr_row['password'];
             if (password_verify($pass, $hash_pass))
             {
-                showAlert("success", "Login Successful! Please wait while we redirect you to your account");
-                $login = true;
+                // showAlert("success", "Login Successful! Please wait while we redirect you to your account");
+                // $login = true;
                 
                 session_start();
                 $_SESSION['name'] = $curr_row['name'];
